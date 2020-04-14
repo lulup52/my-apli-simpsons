@@ -1,26 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+//import Navbar from './component/Navbar';
+//import QuoteList from './component/QuoteList.js';
+//import QuoteForm from './component/QuoteForm.js';
+import axios from 'axios';
+import QuoteCard from './component/QuoteCard';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { simpson : null}
+    this.apiCall = this.apiCall.bind(this)
+  }
+
+  apiCall() {
+    axios.get('https://thesimpsonsquoteapi.glitch.me/quotes')
+    .then(response => response.data)
+    .then(data => { this.setState({simpson: data[0]});
+  });
+  }
+  
+  render() { 
+    return (
+      <div  className="App">
+          <button type="button" onClick = {this.apiCall}>Random Quote</button>
+          {this.state.simpson != null && <QuoteCard {...this.state.simpson}/>}
+        
+      </div>
+    );
+    }
+  
 }
+
+//<div>
+          //<Navbar/>
+        //</div>
+        //<div>
+          //<QuoteForm/>
+        //</div>
+        //<div>
+          //<QuoteList/>
+        //</div>
 
 export default App;

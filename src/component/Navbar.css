@@ -1,0 +1,11 @@
+.Navbar {
+    background: #5f5a52;
+    padding: 1em 2em;
+    color: white;
+  }
+  
+  .Navbar * {
+    margin: 0;
+  }
+  
+  
